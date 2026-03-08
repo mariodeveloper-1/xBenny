@@ -1,0 +1,235 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #FFF0F5; /* Lavender Blush - a very soft pink */
+    color: #4A4A4A;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Confetti Canvas */
+#confetti-canvas, #mimosa-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allows clicking through the canvas */
+    z-index: 999; /* Ensure confetti is on top */
+}
+
+/* Typography */
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    color: #DAA520; /* Goldenrod - a rich gold color */
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #B8860B; /* Dark Goldenrod */
+}
+
+/* Dynamic Text Animation */
+#dynamic-text {
+    border-right: 2px solid #DAA520; /* Cursor */
+    padding-right: 2px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #555;
+    text-align: justify; /* Justify text for a clean look */
+}
+
+/* Layout */
+.container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1; /* Content below confetti */
+}
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: fixed; /* Fixed position for the Apple-style effect */
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background: transparent;
+    overflow: hidden; /* Prevent huge text from causing scrollbars */
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0;
+    opacity: 0;
+    animation: fadeIn 2s ease-out forwards;
+    will-change: transform, opacity; /* Optimize for animation */
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards; /* Reduced delay and duration */
+    transition: opacity 0.1s; /* Faster response */
+}
+
+.scroll-indicator span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid #DAA520;
+    border-right: 2px solid #DAA520;
+    transform: rotate(45deg);
+    margin: -10px;
+    animation: scroll 2s infinite;
+}
+
+.scroll-indicator span:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.scroll-indicator span:nth-child(3) {
+    animation-delay: .4s;
+}
+
+@keyframes scroll {
+    0% { opacity: 0; transform: rotate(45deg) translate(-20px, -20px); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: rotate(45deg) translate(20px, 20px); }
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    
+    /* Push content down to start after the hero section */
+    position: relative;
+    z-index: 10;
+    margin-top: 100vh;
+    background: transparent; /* Allows seeing the transition, but cards have background */
+}
+
+.intro-text {
+    text-align: center;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+}
+
+.intro-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Cards */
+.card {
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 3rem;
+    box-shadow: 0 10px 25px rgba(218, 165, 32, 0.15); /* Soft gold shadow */
+    border: 1px solid #FFF5EE; /* Seashell border */
+    
+    /* Scroll Animation Initial State */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #B8860B; /* Dark Goldenrod */
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-bottom: 2rem;
+    font-style: italic;
+    color: #888;
+}
+
+.signature {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    color: #DAA520; /* Gold */
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+    
+    .card {
+        padding: 2rem;
+    }
+}
